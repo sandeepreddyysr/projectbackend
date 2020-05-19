@@ -1,9 +1,19 @@
 var db=require('../db.js');
 var notification=require('../models/notification');
+var jwt = require('jsonwebtoken');
 exports.newNotification = (req,res)=>{
+    var imageurl;
+    if(req.file){
+        var image = req.file.path;
+        var url = image.split('\\');
+         imageurl = "http://localhost:4200/"+url[1];
+    }
     var createNotification=new notification({
         title: req.body.title,
-        description: req.body.description
+        description: req.body.description,
+        link : req.body.link,
+        image : imageurl,
+        date : Date()
     })
     createNotification.save( function(err,data){
             if(err){
@@ -16,7 +26,7 @@ exports.newNotification = (req,res)=>{
        })
  }
 exports.getNotification = (req,res)=>{
-   notification.find({}, function(err,data){
+   notification.find({}).sort({date:-1}).exec(function(err,data){
            if(err){
                res.satus(404);
            }

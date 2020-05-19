@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-exports.db=mongoose.connect(newFunction(), {useNewUrlParser: true, useUnifiedTopology: true});
+const db=require('../db.js');
 
 var user = new Schema({
 
@@ -13,6 +13,3 @@ var user = new Schema({
 });
 module.exports = mongoose.model('User',user);
 
-function newFunction() {
-    return 'mongodb://localhost/OmniwyseProject';
-}
