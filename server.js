@@ -5,6 +5,10 @@ var bodyParser = require('body-parser');
 var getNotification=require('./controllers/getNotifications');
 var loginController = require('./controllers/loginController');
 var cors = require('cors');
+var path = require('path');
+
+app.use('/uploads', express.static('uploads'));
+
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());

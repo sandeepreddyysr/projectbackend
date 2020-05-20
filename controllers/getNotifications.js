@@ -6,13 +6,13 @@ exports.newNotification = (req,res)=>{
     if(req.file){
         var image = req.file.path;
         var url = image.split('\\');
-         imageurl = "http://localhost:4200/"+url[1];
+         imageurl = "http://localhost:8080/uploads/"+url[1];
     }
     var createNotification=new notification({
         title: req.body.title,
         description: req.body.description,
         link : req.body.link,
-        image : imageurl,
+        imageURL : imageurl,
         date : Date()
     })
     createNotification.save( function(err,data){
