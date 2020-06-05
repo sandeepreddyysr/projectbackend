@@ -6,7 +6,7 @@ var notification=new Schema({
     description:String,
     link:String,
     imageURL:String,
-    //tags:[{type:String, ref:'Tags'}],
+    tag : String,
     date:Date,
     isScheduled:{type:Boolean,default:false}
 });

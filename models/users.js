@@ -4,11 +4,12 @@ const db=require('../db.js');
 
 var user = new Schema({
 
-    username:String,
+    name:String,
     email: String,
     mobile_number:Number,
     isAdmin: Boolean,
-    password: String
+    password: String,
+    tags:[{type:String}]
  
 });
 module.exports = mongoose.model('User',user);

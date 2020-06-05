@@ -35,9 +35,27 @@ var storage = multer.diskStorage({
       storage: storage ,
       fileFilter:fileFilter
     })
-app.post('/create', upload.single('image'),getNotification.newNotification);
+
+    function verifyToken(req,res,next){
+      const barearHeader = req.headers['authorization'];
+  
+      if(typeof barearHeader != 'undefined'){
+  
+          const barear = barearHeader.split(' ');
+  
+          const barearToken = barear[1];
+  
+          req.token = barearToken;
+  
+          next();
+  
+      }else{
+          res.sendStatus(403);
+      }
+  }
+app.post('/create',verifyToken, upload.single('image'),getNotification.newNotification);
 app.post('/login',loginController.login);
-app.get('/notifications',getNotification.getNotification);
+app.get('/notifications',verifyToken,getNotification.getNotification);
 app.listen(8080,()=>{
 
     console.log("Server started listening on port 8080");
