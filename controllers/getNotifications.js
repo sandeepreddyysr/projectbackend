@@ -14,7 +14,6 @@ exports.newNotification = (req,res)=>{
         else{
     var imageurl;
     var date;
-   // var tag=JSON.parse(req.body.tags);
     if(req.file){
         var image = req.file.path;
         var url = image.split('\\');
@@ -57,11 +56,12 @@ exports.getNotification = (req,res)=>{
             console.log(err);
         }
         else{
-            console.log(userdata);
-            console.log(userdata.user.name);
+           // console.log(userdata);
+            //console.log(userdata.user.name);
             var tags=userdata.user.tags;
            // console.log(tags);
     var currentTime = new Date(); 
+    
    notification.find({$and:[{$or : [{tag:'All'},{tag:{$in : tags}}]},{date : {$lte:currentTime}}]}).sort({date:-1}).exec(function(err,data){
            if(err){
                res.satus(404);

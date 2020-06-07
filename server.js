@@ -3,6 +3,7 @@ var app = express();
 var User = require('./models/users');
 var bodyParser = require('body-parser');
 var getNotification=require('./controllers/getNotifications');
+var schedules=require('./controllers/scheduleController')
 var loginController = require('./controllers/loginController');
 var cors = require('cors');
 var path = require('path');
@@ -56,6 +57,8 @@ var storage = multer.diskStorage({
 app.post('/create',verifyToken, upload.single('image'),getNotification.newNotification);
 app.post('/login',loginController.login);
 app.get('/notifications',verifyToken,getNotification.getNotification);
+app.get('/schedules',verifyToken,schedules.Schedules);
+app.delete('/delete/:id',schedules.delete);
 app.listen(8080,()=>{
 
     console.log("Server started listening on port 8080");

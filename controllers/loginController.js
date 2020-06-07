@@ -20,7 +20,7 @@ exports.login = (req,res)=>{
                             isAdmin:user.isAdmin,
                             token:token
                         })
-                        console.log(token);
+                      //  console.log(token);
                     })
 
             }else{
